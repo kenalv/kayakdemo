@@ -1,0 +1,73 @@
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-link nav-item" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"  routerLinkActive="active"  routerLink="/flights">Flights</a>
+        <a class="nav-link nav-item" id="nav-home-tab2" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home2" routerLink="/booking">TEMP</a>
+    </div>
+</nav>    
+
+   
+    
+
+<form  #mySearchForm='ngForm' >
+    <div class="d-flex flex-sm-row">
+    <div class="d-flex flex-sm-column dist-equal-2">
+
+          <div class="d-flex flex-sm-row justify-content-start">
+     
+            <div class="form-group n-section flex-sm-column">
+                <select class="custom-select custom-select-lg mb-3" name='out_in' [(ngModel)]='searchModel.out_in' required>
+                    <option  value="ida">Ida</option>
+                    <option  selected value="mixto">Ida - Vuelta</option>
+                  </select>
+            </div>
+
+            <div class="form-group n-section flex-sm-column">
+                <select class="custom-select custom-select-lg mb-3"  name='flight_class' [(ngModel)]='searchModel.flight_class' required>
+                    <option selected>Select a flight class</option>
+                    <option *ngFor="let clas of classesData"  value="{{clas.cost}}">{{ clas.name }}</option>
+                  </select>
+            </div>
+            <div class="form-group n-section flex-sm-column">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon-wrapping">#</span>
+                      </div>
+                    <input type="number" aria-label="Destiny" class="form-control" style="width:100px;" name='tickets' [(ngModel)]='searchModel.tickets' >
+                  </div>
+              </div>
+      </div>
+
+      <div class="d-flex flex-sm-row">
+           <!-- BUTTON GROUP --> 
+           <div class="n-section flex-sm-column">
+              <div class="input-group">
+                  <input type="text" aria-label="Origin" class="form-control" placeholder="Origin" name='origin'  [(ngModel)]='searchModel.origin' required>
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="addon-wrapping"><-></span>
+                  </div>
+                  <input type="text" aria-label="Destiny" class="form-control" placeholder="Destiny" name='destiny' [(ngModel)]='searchModel.destiny' required   >
+              </div>
+          </div>
+          <!-- END BUTTON GROUP -->
+           <!-- BUTTON GROUP --> 
+           <div class="n-section flex-sm-column">
+              <div  *ngIf="searchModel.out_in == 'mixto'; else elseTemplate" class="input-group">
+                  <input type="date" aria-label="outdate" class="form-control" placeholder="2019-03-28"  name='out_date' [(ngModel)]='searchModel.out_date' required >
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="addon-wrapping"><-></span>
+                  </div>
+                  <input type="date" aria-label="indate" class="form-control" placeholder="2019-04-04" name='in_date' [(ngModel)]='searchModel.in_date' >
+              </div>
+              <ng-template #elseTemplate>
+                    <input type="date" aria-label="outdate" class="form-control" placeholder="Origin"  name='out_date' [(ngModel)]='searchModel.out_date' >
+                </ng-template>
+          </div>
+           <!-- END BUTTON GROUP -->
+      </div>
+    </div>
+      <div class="d-flex flex-sm-column dist-equal">
+        <a class= 'btn btn-light'   (click)='newSearch()' >Search</a>
+      </div>
+    </div>
+    </form>
+

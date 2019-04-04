@@ -1,0 +1,128 @@
+
+<ng-container *ngIf="reserve_type == 'ida'; else elseTemplate">
+        <div class="d-flex">
+                <div class="d-flex flex-sm-column dist-equal-3" >
+                        <div class="d-flex flex-sm-row">
+                                <h4>{{orig_country}} -> {{dest_country}} </h4>
+                        </div>
+                        <div class="d-flex flex-sm-row jumbotron">
+                                
+                            <div class="d-flex flex-sm-column w-100">
+                                <h3>Flgiht review:</h3>
+                                
+                                <div  *ngFor="let flight of flightsData" class="card text-center d-flex flex-sm-row justify-content-center w-70 "  >
+                                        
+                                 <div  class="card-section">
+                                    <h3 class="card-title-text">{{flight.out_date}}</h3>
+                                    <p class="card-sm-text"> {{flight.airline}} </p>
+                                  </div>
+                                
+                                  <div class="card-section">
+                                    <p class="card-sm-text">From: {{flight.orig}}</p>
+                                    <p class="card-sm-text">To: {{flight.dest}} </p>
+                                  </div>
+                                
+                                  <div class="card-section">
+                                    <p class="card-sm-text">Flight Duration: {{flight.duration}}</p>
+                                   
+                                  </div>
+                                </div>
+                                    
+                    
+                            </div>
+                        </div>                    
+                  </div>
+                <div class="d-flex flex-sm-column dist-equal-3" >
+                  <h2>Trip Summary:</h2>
+                  <div class="card d-flex flex-sm-row justify-content-center w-90 section-divider"  >
+                  
+                        <div  class="card-section align-h-center">
+                            <h5 class="card-sm-text">Tickets:</h5>
+                            <h5 class="card-sm-text">Flight:</h5>
+                        </div>
+                        <div  class="card-section align-h-center ">
+                                <h5 class="card-sm-text">{{tickets}}</h5>
+                                <h5 class="card-sm-text">{{flight_cost}}</h5>
+                        </div>
+                    
+                  </div>
+                  <div class=" d-flex flex-sm-row justify-content-end">
+                        <div  class="dist-equal  d-flex flex-sm-column align-h-center">
+                                <h5 class="card-sm-text">Trip total:</h5>
+                        </div>
+                        <div  class="dist-equal d-flex flex-sm-column align-h-center">
+                                <h5 class="card-sm-text">${{tickets * flight_cost}}</h5>
+                        </div>
+                  </div> 
+                  <div  class=" d-flex flex-sm-row align-h-center justify-content-center">
+                        <button type="button" (click)='reserveData(one_flight_id,tickets)' class="btn btn-link">Reserve Now!</button>
+                </div>
+                </div>
+        </div>
+</ng-container>
+<ng-template #elseTemplate>
+        <div class="d-flex">
+                <div class="d-flex flex-sm-column dist-equal-3" >
+                        <div class="d-flex flex-sm-row">
+                                <h4>{{orig_country}} -> {{dest_country}} </h4>
+                        </div>
+                        <div class="d-flex flex-sm-row jumbotron">
+                                
+                            <div class="d-flex flex-sm-column w-100">
+                                <h3>Flgiht review:</h3>
+                                
+                                <div  *ngFor="let flight of oiflightsData"  class="card text-center d-flex flex-sm-row justify-content-center w-70 "  >
+                                        
+                                 <div  class="card-section">
+                                    <h3 class="card-title-text">{{flight.outData.out_date}}</h3>
+                                    <p class="card-sm-text"> {{flight.outData.airline}} </p>
+                                  </div>
+                                
+                                  <div class="card-section">
+                                    <p class="card-sm-text">From: {{flight.outData.orig}}</p>
+                                    <p class="card-sm-text">To: {{flight.outData.dest}} </p>
+                                  </div>
+                                
+                                  <div class="card-section">
+                                    <p class="card-sm-text">Flight Duration: {{flight.outData.duration}}</p>
+                                   
+                                  </div>
+                                    
+
+
+
+                                </div>
+                                    
+                    
+                            </div>
+                        </div>                    
+                  </div>
+                <div class="d-flex flex-sm-column dist-equal-3" >
+                  <h2>Trip Summary:</h2>
+                  <div class="card d-flex flex-sm-row justify-content-center w-90 section-divider"  >
+                  
+                        <div  class="card-section align-h-center">
+                            <h5 class="card-sm-text">Tickets:</h5>
+                            <h5 class="card-sm-text">Flight:</h5>
+                        </div>
+                        <div  class="card-section align-h-center ">
+                                <h5 class="card-sm-text">{{tickets}}</h5>
+                                <h5 class="card-sm-text">{{flight_cost}}</h5>
+                        </div>
+                    
+                  </div>
+                  <div class=" d-flex flex-sm-row justify-content-end">
+                        <div  class="dist-equal  d-flex flex-sm-column align-h-center">
+                                <h5 class="card-sm-text">Trip total:</h5>
+                        </div>
+                        <div  class="dist-equal d-flex flex-sm-column align-h-center">
+                                <h5 class="card-sm-text">${{tickets * flight_cost}}</h5>
+                        </div>
+                  </div> 
+                  <div  class=" d-flex flex-sm-row align-h-center justify-content-center">
+                        <button type="button" (click)='reserveData(one_flight_id,tickets)' class="btn btn-link">Reserve Now!</button>
+                </div>
+                </div>
+        </div>
+</ng-template>
+

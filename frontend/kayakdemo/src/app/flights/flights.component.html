@@ -1,0 +1,117 @@
+
+  <div class="d-flex">
+      <div class="d-flex flex-sm-column dist-equal" style=" max-height: 820px ">
+        
+      </div>
+      <div class="d-flex flex-sm-column dist-equal-3" style="overflow-y: scroll; max-height: 820px; ">
+        
+        <ng-container *ngIf="search_status == 'ida'; else elseTemplate">
+          <!--  FOR OUT FLIGHTS -->
+        <div  *ngFor="let flight of flightsData"  class="card text-center d-flex flex-row justify-content-center w-70 " >
+        
+          <div class="card-section ">
+            <h6 class="card-title-text"> {{flight.orig}} - {{flight.dest}}</h6>
+            <p class="card-sm-text"> {{flight.airline}} </p>
+          </div>
+        
+          <div class="card-section">
+            <p class="card-sm-text">{{flight.duration}}</p>
+            <p class="card-sm-text">{{flight.class_type}} </p>
+          </div>
+        
+          <div class="card-section">
+            <p class="card-sm-text">Date: {{flight.out_date}}</p>
+            <p class="card-sm-text">Tickets: {{flight.tiquets}} </p>
+          </div>
+        
+        
+          <div class="card-cost-section">
+            <h6 class="card-title-text">${{flight.cost}} </h6>
+            <!-- <a href="#" class="btn btn-gradient-ry">Reserve</a> -->
+            <!-- <a href="#" class="btn btn-link">More Details</a> -->
+            <a (click)="onReserve(flight.id)"  class="btn btn-gradient-ry">Reserve</a>
+                
+          </div>
+        
+        </div>
+        <!-- END OUT FLIGHTS TEMPLATE-->
+        </ng-container>
+  
+        <!-- IN OUT Template -->
+        <ng-template #elseTemplate>
+
+          <div  *ngFor="let flight of oiflightsData" class="card text-center d-flex flex-sm-row justify-content-center w-70 "  >
+        <!-- FIRST CARD -->
+            <div class="d-flex flex-sm-column dist-equal-5" >
+              
+                <div class="d-flex flex-sm-row section-divider" >
+            
+                    <div  class="card-section">
+                      <h6 class="card-title-text"> {{flight.outData.orig}} - {{flight.outData.dest}}</h6>
+                      <p class="card-sm-text"> {{flight.outData.airline}} </p>
+                    </div>
+                  
+                    <div class="card-section">
+                      <p class="card-sm-text">{{flight.outData.duration}}</p>
+                      <p class="card-sm-text">{{flight.outData.class_type}} </p>
+                    </div>
+                  
+                    <div class="card-section">
+                      <p class="card-sm-text">Date: {{flight.outData.out_date}}</p>
+                      <p class="card-sm-text">Tickets: {{flight.outData.tiquets}} </p>
+                    </div>
+              
+                </div>    
+              
+              <!-- <div class="d-flex flex-sm-row" id="{{flight.outData.id}}">
+                  <div class="card card-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+              </div> -->
+            
+              <!-- SECOND CARD -->
+                <div class="d-flex flex-sm-row" id="headingOne">
+          
+                  <div  class="card-section">
+                      <h6 class="card-title-text"> {{flight.inData.orig}} - {{flight.inData.dest}}</h6>
+                      <p class="card-sm-text"> {{flight.inData.airline}} </p>
+                    </div>
+                  
+                    <div class="card-section">
+                      <p class="card-sm-text">{{flight.inData.duration}}</p>
+                      <p class="card-sm-text">{{flight.inData.class_type}} </p>
+                    </div>
+                  
+                    <div class="card-section">
+                      <p class="card-sm-text">Date: {{flight.inData.out_date}}</p>
+                      <p class="card-sm-text">Tickets: {{flight.inData.tiquets}} </p>
+                    </div>
+          
+                </div>
+            </div>
+            <div class="d-flex flex-sm-column dist-equal justify-content-center">
+        
+              <div class="card-cost-section">
+              
+                  <h6 class="card-title-text">${{(flight.inData.cost + flight.outData.cost)}} </h6>
+                  <a (click)="onReserve(flight.outData.id)"  class="btn btn-gradient-ry">Reserve</a>
+                  
+                  <!-- <a class="btn btn-primary" [data-toggle]="{{flight.outData.id}}" href="#{{flight.outData.id}}" role="button" aria-expanded="false"
+                [attr.aria-controls]="flight.outData.id">Toggle first element</a>
+          -->
+              </div>
+            </div>
+        
+          </div>
+        </ng-template>
+        
+      </div>
+      <div class="d-flex flex-sm-column dist-equal" style="max-height: 820px ">
+      
+      </div>
+  
+    </div>
+
+
+
+<!--  FOR IN-OUT FLIGHTS -->
